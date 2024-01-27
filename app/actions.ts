@@ -16,6 +16,7 @@ export async function updateUserData(formData: FormData) {
           name: formData.get("name"),
           title: formData.get("title"),
           description: formData.get("description"),
+          image: formData.get("image")
         },
       },
     }, // Update the 'userData' property with new data
@@ -44,7 +45,8 @@ export async function createUserProject(formData: FormData) {
   const newProjectObject = {
     name: formData.get("name"),
     description: formData.get("description"),
-    stack: formData.get("stack")
+    stack: formData.get("stack"),
+    
   };
 
   const updatedUser = await User.findOneAndUpdate(

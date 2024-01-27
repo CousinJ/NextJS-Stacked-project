@@ -15,6 +15,7 @@ const propsObject = {
     name: userData?.name ?? '',
     title: userData?.title ?? '',
     description: userData?.description ?? '',
+    image: userData?.image ?? '',
 }
    
     return(<form action={updateUserData} className='text-m'>
