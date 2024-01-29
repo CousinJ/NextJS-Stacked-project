@@ -1,13 +1,19 @@
 "use server";
+import { readFile } from "fs";
 import { auth } from "@clerk/nextjs";
 import mongoose from "mongoose";
 import User from "./db/models/user";
 import { revalidatePath } from "next/cache";
 import { connectDB } from "./db/connect";
 
-export async function updateUserData(formData: FormData) {
+
+
+
+export async function updateUserData( formData: FormData) {
   const { userId } = auth();
   console.log(userId);
+  
+  
   await User.findOneAndUpdate(
     { user_id: userId }, // Query to find the document with the specified ID
     {
@@ -16,7 +22,7 @@ export async function updateUserData(formData: FormData) {
           name: formData.get("name"),
           title: formData.get("title"),
           description: formData.get("description"),
-          image: formData.get("image")
+          image: formData.get("imageUrl")
         },
       },
     }, // Update the 'userData' property with new data
