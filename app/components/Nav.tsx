@@ -13,13 +13,13 @@ function Nav() {
    
     
   return ( 
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 ">
       <div className="flex-1">
         <a className="btn btn-ghost text-xl">Stacked</a>
       </div>
       {/* positioned in middle  */}
 
-      {user && <div className=" flex-1">
+      {user && <div className=" flex-1 absolute left-1/2 transform -translate-x-1/2">
         <Link className="m-4" href='/explore'>Explore</Link>
         <Link className="m-4" href='/dashboard'>Dashboard</Link>
         <Link className="m-4" href='/profile'>Profile</Link>

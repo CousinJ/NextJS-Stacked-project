@@ -9,7 +9,7 @@ function ProfileInput(props: any) {
     description: props.userData.description,
     image: props.userData.image,
   };
-
+//function to handle changing file data to usable URL using FileReader.
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files && files.length > 0) {
@@ -29,12 +29,17 @@ function ProfileInput(props: any) {
     }
   };
 
-  //image do not save the data normally. there may need to be a cloud service to upload images to.
+//use state variables to keep track of current user data state. 
+//set it equal to loadedUserData to fetch data from parent page.
   const [currentUserData, setCurrentUserData] = useState(loadedUserData);
+
+
   // Refrsh the page and set database Data as the client data
   useEffect(() => {
     setCurrentUserData(loadedUserData);
   }, []);
+
+
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>

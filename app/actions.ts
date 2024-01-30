@@ -63,3 +63,13 @@ export async function createUserProject(formData: FormData) {
 
     revalidatePath('/dashboard')
 }
+
+
+export async function exploreSearchFunction(searchTerm: string) {
+ // the explore join component uses this function
+
+ //it needs to return the search for users and projects. 
+
+ //I am going to make a private and public setting to search a new model called public_projects.
+}
+

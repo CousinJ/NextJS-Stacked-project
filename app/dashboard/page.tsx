@@ -8,11 +8,12 @@ import User from '../db/models/user';
 import { thisUserData } from '../actions';
 
 
-
+//adding a public or private setting
 interface ProjectItem {
   name: string,
   description: string,
   stack: string,
+  public: boolean
 }
 
 

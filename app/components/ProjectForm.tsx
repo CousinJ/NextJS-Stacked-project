@@ -1,7 +1,49 @@
 "use client"
-import React from 'react'
+import React,{useState} from 'react'
 import { createUserProject } from '../actions'
+
+
+
+
 function ProjectForm(props: any) {
+
+
+    //use hidden input tp send publicProject up to the server action
+const [publicProject, setPublicProject] = useState(true)
+const defaultValue = true;
+const [divStyle, setDivStyle] = useState({
+    slideAmount: '12',
+    color: 'bg-green-500'
+  })
+
+    const handleSelectClick = () => {
+        console.log(publicProject)
+       if(publicProject) {
+        setDivStyle({
+            slideAmount: '0',
+            color: 'bg-red-500'
+        })
+        setPublicProject(false)
+       }
+       else {
+        setDivStyle({
+            slideAmount: '12',
+            color: 'bg-green-500'
+        })
+        setPublicProject(true)
+       }
+       
+        }
+
+
+
+
+
+
+
+
+
+
 
 const handleClose = () => {
     props.setModalBool(false)
@@ -34,6 +76,24 @@ const handleClose = () => {
                    <h3>Stack</h3>
                    </div>
                    <input  name="stack" type="text"  className="input input-bordered input-primary w-full max-w-xs m-2 text-sm" />         
+               </div>
+    {/* Public? */}
+   <div className="w-full h-16 bg-gray-800 text-white p-4 rounded-lg m-4 flex items-center">
+                   <div className='w-20 h-full items-center '>
+                   <h3>Public</h3>
+                   </div>
+                   <div className=" w-full h-32 text-white p-4 rounded-lg m-4 flex items-center">
+     {/* yes no buttons */}
+     
+     <div  onClick={handleSelectClick} className={`${divStyle.color} transition-all duration-200 ease-in-out  w-24 h-8 rounded-xl`}> 
+     
+        <div className={` flex items-center justify-center w-1/2 h-8 rounded-xl transition-all duration-100 ease-in-out border bg-gray-800 translate-x-${divStyle.slideAmount}`}>
+            
+
+        </div>
+     </div>
+     
+   </div>
                </div>
    {/*Create*/}
    <div className=" w-full h-32 text-white p-4 rounded-lg m-4 flex items-center">
