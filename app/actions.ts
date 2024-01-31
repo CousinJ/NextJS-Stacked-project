@@ -60,9 +60,7 @@ const projectContentObject = {
   followers: [],
 
 }//make userID a different string 
-const userIdentity = {
-
-} 
+ 
 //create new project instance 
 const project = await Project.create({
   user_info: user_info,
@@ -110,7 +108,7 @@ export async function exploreSearchFunction(searchTerm: string) {
     const projectResults = await Project.find({
       'project_info.name': { $regex: searchTerm, $options: 'i' }
     });
-    console.log(projectResults)
+    
     //change to plain json 
     const returnableObject = {
       user_info: projectResults[0].user_info,

@@ -1,20 +1,27 @@
 "use client"
 import { exploreSearchFunction } from '../actions'
 import React,{useState, useEffect, MouseEvent} from 'react'
-
+import ProjectCard from './ProjectCard'
 
 function ExploreJoin() {
 
 
+  
 
 //useState vars
 const [searchQuery, setSearchQuery] = useState('')
-const [searchResults, setSearchResults] = useState()
+const [searchResults, setSearchResults] = useState({
+  user_info: '',
+  project_info: '',
+})
 const [userOrProject, setUserOrProject] = useState('users')
 const [buttonStyle, setButtonStyle] = useState({
   users: 'primary',
   projects: 'neutral'
 })
+
+
+
 
 
 //you can put this type in here to be more precise (I cant find the type)
@@ -42,18 +49,31 @@ const handleSelectClick = (e: any) => {
   
   }
 
+
+useEffect(() => {
+  console.log(searchResults)
+}, [searchResults])
+
 //you can put this type in here to be more precise (I cant find the type)
 const handleQueryChange = (e: any) => {
   setSearchQuery(e.target.value)
 } 
 
-const  handleSearchSubmit = async () => {
-console.log(searchQuery)
-
+const  handleSearchSubmit = async (e: any) => {
+  e.preventDefault()
   //get do the search and await the results
- const results = await exploreSearchFunction(searchQuery)
-console.log(results)
- //setsearch results
+  try {
+    const results = await exploreSearchFunction(searchQuery)
+    console.log(results)
+
+  setSearchResults(results);
+ 
+  }  catch {
+    console.log("error searching")
+  }
+ 
+ 
+
 
 
 }
@@ -73,8 +93,8 @@ console.log(results)
   <button onClick={handleSearchSubmit} type="submit" className='btn btn-primary'>search</button>
   </form>
   
-  
-  
+  {/* will need to change how this renders */}
+  {searchResults && <ProjectCard data={searchResults.project_info} />}
   
     </div>
     
