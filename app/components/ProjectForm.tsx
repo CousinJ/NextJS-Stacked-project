@@ -1,5 +1,5 @@
 "use client"
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import { createUserProject } from '../actions'
 
 
@@ -8,29 +8,34 @@ import { createUserProject } from '../actions'
 function ProjectForm(props: any) {
 
 
+   
+
     //use hidden input tp send publicProject up to the server action
-const [publicProject, setPublicProject] = useState(true)
-const defaultValue = true;
+const [publicProject, setPublicProject] = useState(1)
+
 const [divStyle, setDivStyle] = useState({
     slideAmount: '12',
     color: 'bg-green-500'
   })
 
+
+
     const handleSelectClick = () => {
+        console.log(divStyle.slideAmount)
         console.log(publicProject)
        if(publicProject) {
         setDivStyle({
             slideAmount: '0',
             color: 'bg-red-500'
         })
-        setPublicProject(false)
+        setPublicProject(0)
        }
        else {
         setDivStyle({
             slideAmount: '12',
             color: 'bg-green-500'
         })
-        setPublicProject(true)
+        setPublicProject(1)
        }
        
         }
@@ -80,14 +85,18 @@ const handleClose = () => {
     {/* Public? */}
    <div className="w-full h-16 bg-gray-800 text-white p-4 rounded-lg m-4 flex items-center">
                    <div className='w-20 h-full items-center '>
-                   <h3>Public</h3>
+                   
+                    
+                    {!publicProject && <h3>Private</h3> || publicProject && <h3>Public</h3>}
+                    
                    </div>
                    <div className=" w-full h-32 text-white p-4 rounded-lg m-4 flex items-center">
+                    <input type="hidden" name="public" value={publicProject}></input>
      {/* yes no buttons */}
+     {/* going to redo this whole UI the values work great but the animation with translatex does not work some weird css thing */}
+     <div  onClick={handleSelectClick} className={`${divStyle.color} w-24 h-8 rounded-xl`}> 
      
-     <div  onClick={handleSelectClick} className={`${divStyle.color} transition-all duration-200 ease-in-out  w-24 h-8 rounded-xl`}> 
-     
-        <div className={` flex items-center justify-center w-1/2 h-8 rounded-xl transition-all duration-100 ease-in-out border bg-gray-800 translate-x-${divStyle.slideAmount}`}>
+        <div  className={`  w-1/2 h-8 rounded-xl transition-all duration-200 ease-in-out border  bg-gray-800 `}>
             
 
         </div>

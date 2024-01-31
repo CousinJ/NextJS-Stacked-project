@@ -6,7 +6,7 @@ function ProjectCard(props: any) {
                 {props.data.name}
             </div>
             
-            <div className='text-amber-500'>
+            <div className='text-amber-100'>
                 description
                 <p className=' text-center text-white'> {props.data.description}</p>
             </div>
@@ -14,6 +14,12 @@ function ProjectCard(props: any) {
             <div className='text-teal-500 mt-auto'>
                 Stack
                 <p className=' text-white' >  {props.data.stack}</p>
+            </div>
+            <div className=' mt-auto'>
+                {props.data.public && <p className="text-green-500">public</p>}
+                {!props.data.public && <p className="text-orange-500">private</p>}
+                
+                
             </div>
             
     </div>)

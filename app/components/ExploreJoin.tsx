@@ -9,7 +9,7 @@ function ExploreJoin() {
 
 //useState vars
 const [searchQuery, setSearchQuery] = useState('')
-const [searchResults, setSearchResults] = useState('')
+const [searchResults, setSearchResults] = useState()
 const [userOrProject, setUserOrProject] = useState('users')
 const [buttonStyle, setButtonStyle] = useState({
   users: 'primary',
@@ -52,8 +52,8 @@ console.log(searchQuery)
 
   //get do the search and await the results
  const results = await exploreSearchFunction(searchQuery)
-
- console.log(results)
+console.log(results)
+ //setsearch results
 
 
 }

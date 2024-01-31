@@ -3,10 +3,12 @@ import { readFile } from "fs";
 import { auth } from "@clerk/nextjs";
 import mongoose from "mongoose";
 import User from "./db/models/user";
+import Project from "./db/models/project"
 import { revalidatePath } from "next/cache";
 import { connectDB } from "./db/connect";
 
 
+//======================================================================================================
 
 
 export async function updateUserData( formData: FormData) {
@@ -30,6 +32,7 @@ export async function updateUserData( formData: FormData) {
   );
 }
 
+//======================================================================================================
 
 
 export async function thisUserData() {
@@ -44,14 +47,42 @@ export async function thisUserData() {
   return userDataObject;
 }
 
+//======================================================================================================
 
+//function used to set project up in createUserProject
+async function InitializeProject(user_info:Object, projectInfo: Object ) {
+//FIXED the duplication error by deleting the collection in mongo compass then restarting it 
 
+  //pass in PROJECT CONTENT OBJECT here
+  //this is where we change the project content object
+const projectContentObject = {
+  tasks: [],
+  followers: [],
+
+}//make userID a different string 
+const userIdentity = {
+
+} 
+//create new project instance 
+const project = await Project.create({
+  user_info: user_info,
+  project_info: projectInfo,
+  project_content: projectContentObject,
+});
+
+console.log(`${project} INSERTED INTO DB`)
+}
+
+//======================================================================================================
 export async function createUserProject(formData: FormData) {
+  //you need to make sure you connect db or you get timeout buffering errors
+  connectDB()
   const { userId } = auth();
   const newProjectObject = {
     name: formData.get("name"),
     description: formData.get("description"),
     stack: formData.get("stack"),
+    public: formData.get("public")
     
   };
 
@@ -61,15 +92,38 @@ export async function createUserProject(formData: FormData) {
     { new: true } // Return the modified document
   );
 
+  //create new project in project collection
+  console.log(updatedUser)
+  await InitializeProject(updatedUser.user_data, newProjectObject)
     revalidatePath('/dashboard')
+
+    
 }
 
+//======================================================================================================
 
 export async function exploreSearchFunction(searchTerm: string) {
- // the explore join component uses this function
+  //seems to be working as expected you will need to change out the 0 for other iterations.for more search results
+  //needs to have a user/project search filter to change the search query.
+  try {
+    // Search for projects based on the name property in the project_info object
+    const projectResults = await Project.find({
+      'project_info.name': { $regex: searchTerm, $options: 'i' }
+    });
+    console.log(projectResults)
+    //change to plain json 
+    const returnableObject = {
+      user_info: projectResults[0].user_info,
+      project_info: projectResults[0].project_info
 
- //it needs to return the search for users and projects. 
+    
+    }
 
- //I am going to make a private and public setting to search a new model called public_projects.
+    console.log(returnableObject)
+
+    return returnableObject;
+  } catch (error) {
+    console.error('Error searching projects:', error);
+    throw error;
+  }
 }
-
