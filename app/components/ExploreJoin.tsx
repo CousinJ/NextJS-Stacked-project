@@ -2,6 +2,7 @@
 import { exploreSearchFunction } from '../actions'
 import React,{useState, useEffect, MouseEvent} from 'react'
 import ProjectCard from './ProjectCard'
+import ExploreResultsSector from './ExploreResultsSector'
 
 function ExploreJoin() {
 
@@ -9,11 +10,12 @@ function ExploreJoin() {
   
 
 //useState vars
+const [showResults, setShowResults] = useState(false)
 const [searchQuery, setSearchQuery] = useState('')
-const [searchResults, setSearchResults] = useState({
+const [searchResults, setSearchResults] = useState([{
   user_info: '',
   project_info: '',
-})
+}])
 const [userOrProject, setUserOrProject] = useState('users')
 const [buttonStyle, setButtonStyle] = useState({
   users: 'primary',
@@ -61,19 +63,36 @@ const handleQueryChange = (e: any) => {
 
 const  handleSearchSubmit = async (e: any) => {
   e.preventDefault()
+  
+  // Check if the search query is empty
+  if (searchQuery === '') {
+    // If search query is empty, hide the results and return
+    setShowResults(false);
+    return;
+  }
+  
   //get do the search and await the results
   try {
+    
     const results = await exploreSearchFunction(searchQuery)
-    console.log(results)
+    
 
   setSearchResults(results);
+
+
  
   }  catch {
     console.log("error searching")
   }
  
  
-
+//check search results
+if(searchResults.length == null) {
+  setShowResults(false)
+}
+else {
+  setShowResults(true)
+}
 
 
 }
@@ -94,7 +113,8 @@ const  handleSearchSubmit = async (e: any) => {
   </form>
   
   {/* will need to change how this renders */}
-  {searchResults && <ProjectCard data={searchResults.project_info} />}
+  <ExploreResultsSector active={showResults} data={searchResults}></ExploreResultsSector>
+  {/* {searchResults && <ProjectCard data={searchResults.project_info} />} */}
   
     </div>
     

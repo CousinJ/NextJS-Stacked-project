@@ -100,26 +100,30 @@ export async function createUserProject(formData: FormData) {
 
 //======================================================================================================
 
+//I got the function working where it returns an array of all matching results containing the search term
+//it filters the data through a couple of different components from explore join as search results (declare type there for an array or it breaks)
+//then to explore result sector, project interaction then lastly the projectCard.
+
 export async function exploreSearchFunction(searchTerm: string) {
-  //seems to be working as expected you will need to change out the 0 for other iterations.for more search results
-  //needs to have a user/project search filter to change the search query.
   try {
     // Search for projects based on the name property in the project_info object
     const projectResults = await Project.find({
       'project_info.name': { $regex: searchTerm, $options: 'i' }
     });
     
-    //change to plain json 
-    const returnableObject = {
-      user_info: projectResults[0].user_info,
-      project_info: projectResults[0].project_info
+    // Create an array to store search results
+    const searchResults: {user_info: any, project_info: any}[] = []
 
-    
-    }
+    // Iterate over each matching project and construct the desired object
+    projectResults.forEach(project => {
+      const resultObject = {
+        user_info: project.user_info,
+        project_info: project.project_info
+      };
+      searchResults.push(resultObject);
+    });
 
-    console.log(returnableObject)
-
-    return returnableObject;
+    return searchResults;
   } catch (error) {
     console.error('Error searching projects:', error);
     throw error;
