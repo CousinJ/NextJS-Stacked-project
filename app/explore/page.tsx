@@ -5,7 +5,7 @@ function Explore() {
 
 
 
-    return(<div className='flex flex-col items-center overflow-y-hidden'> 
+    return(<div className=''> 
         <ExploreJoin />
         
       

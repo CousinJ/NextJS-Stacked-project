@@ -10,9 +10,9 @@ import ProjectCard from "./ProjectCard";
 function ProjectInteraction(props: any) {
 
   
-
+//add logic for selecting project 
   return (
-    <div className="h-96 w-96 m-10 flex flex-col border items-center justify-center">
+    <div className="w-full  m-2 ">
       <ProjectCard data={props.data.project_info} />
       {/* other stuff you want to have render on the user (following user link user to see profile etc.) */}
     </div>

@@ -47,13 +47,13 @@ async function Dashboard() {
 
   return (
     <div className="flex justify-center h-screen">
-      <div className="w-full h-96  text-white p-4 rounded-lg m-8 ">
+      <div className="w-full h-96  text-gray-200 p-4 rounded-lg m-8 ">
         <div className='w-full h-32'>
         <h2 className='text-2xl font-bold mb-4'>My Projects</h2>
          <NewProjectComp />
         </div>
       
-        <div className='flex flex-wrap gap-2'>
+        <div className='flex flex-col gap-2'>
           {/* iterate with map here  */}
           {projectData.map((item: ProjectItem) => (<ProjectCard key={item.name} data={item} />))}
         

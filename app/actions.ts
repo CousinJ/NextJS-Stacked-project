@@ -100,11 +100,7 @@ export async function createUserProject(formData: FormData) {
 
 //======================================================================================================
 
-//I got the function working where it returns an array of all matching results containing the search term
-//it filters the data through a couple of different components from explore join as search results (declare type there for an array or it breaks)
-//then to explore result sector, project interaction then lastly the projectCard.
-
-export async function exploreSearchFunction(searchTerm: string) {
+async function SearchProjectCollection(searchTerm: string) {
   try {
     // Search for projects based on the name property in the project_info object
     const projectResults = await Project.find({
@@ -128,4 +124,50 @@ export async function exploreSearchFunction(searchTerm: string) {
     console.error('Error searching projects:', error);
     throw error;
   }
+}
+//======================================================================================================
+async function searchUserCollection(searchTerm: string) {
+  try {
+    const userResults = await User.find({
+      'user_data.name': {$regex: searchTerm, $options: 'i'},
+      
+      
+    })
+
+     // Create an array to store search results
+     const searchResults: {user_data: any}[] = []
+
+     // Iterate over each matching project and construct the desired object
+     userResults.forEach(user => {
+       const resultObject = {
+         user_data: user.user_data,
+         
+       };
+       searchResults.push(resultObject);
+     });
+     console.log(searchResults)
+     return searchResults;
+   } 
+  catch(error) {
+    console.error('Error searching users:', error);
+    throw error;
+  }
+}
+//======================================================================================================
+//I got the function working where it returns an array of all matching results containing the search term
+//it filters the data through a couple of different components from explore join as search results (declare type there for an array or it breaks)
+//then to explore result sector, project interaction then lastly the projectCard.
+
+export async function exploreSearchFunction(searchTerm: string, userOrProject: string) {
+    let searchResults: any = null
+    if(userOrProject == 'users') {
+      //return empty array and create a conditional in the explore join component to return "no results found " if the array is empty.
+      searchResults = searchUserCollection(searchTerm)
+    }
+    else {
+      
+      searchResults = SearchProjectCollection(searchTerm)
+    }
+
+    return searchResults
 }

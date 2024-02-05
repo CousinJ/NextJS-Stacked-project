@@ -74,7 +74,7 @@ const  handleSearchSubmit = async (e: any) => {
   //get do the search and await the results
   try {
     
-    const results = await exploreSearchFunction(searchQuery)
+    const results = await exploreSearchFunction(searchQuery, userOrProject)
     
 
   setSearchResults(results);
@@ -109,12 +109,13 @@ else {
   </div>
   <form className='flex items-center justify-center w-full '>
   <input  onChange={handleQueryChange} value={searchQuery}  type="text" placeholder="type here" className="input input-bordered w-1/2 " />
+  
   <button onClick={handleSearchSubmit} type="submit" className='btn btn-primary'>search</button>
   </form>
   
-  {/* will need to change how this renders */}
-  <ExploreResultsSector active={showResults} data={searchResults}></ExploreResultsSector>
-  {/* {searchResults && <ProjectCard data={searchResults.project_info} />} */}
+ 
+   {/* will need to change how this renders */}
+   <ExploreResultsSector userOrProject={userOrProject} active={showResults} data={searchResults}></ExploreResultsSector>
   
     </div>
     

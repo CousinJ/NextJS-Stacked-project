@@ -8,12 +8,12 @@ function ExploreResultsSector(props: any) {
 
     
 
-    return(<div>
+    return(<div className='w-full p-8'>
 
-<div className='flex flex-wrap gap-2'>
+<div className='flex flex-col' >
           {/* iterate with map here  */}
           
-          { props.active && props.data.map((item: any) => (<ProjectInteraction key={item.user_info.name} data={item} />))}
+          {props.userOrProject == 'projects' && props.active && props.data.map((item: any) => (<ProjectInteraction key={item.user_info.name} data={item} />))}
         </div>
 
     </div>)
