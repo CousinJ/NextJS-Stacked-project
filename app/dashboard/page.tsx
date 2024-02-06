@@ -20,6 +20,7 @@ interface ProjectItem {
 async function Dashboard() {
   const userDb = await thisUserData()
   const projectData = userDb.project_data
+  const userData = userDb.user_data
   const {userId} = auth()
   
   console.log(userId)
@@ -52,10 +53,10 @@ async function Dashboard() {
         <h2 className='text-2xl font-bold mb-4'>My Projects</h2>
          <NewProjectComp />
         </div>
-      
+      {/* passing in the userData because only the user projects show up in this component. in the search results it iterates through an array of users and grabs both objects off it in the map function */}
         <div className='flex flex-col gap-2'>
           {/* iterate with map here  */}
-          {projectData.map((item: ProjectItem) => (<ProjectCard key={item.name} data={item} />))}
+          {projectData.map((item: ProjectItem) => (<ProjectCard key={item.name} user_info={userData} project_info={item} />))}
         
         </div>
        

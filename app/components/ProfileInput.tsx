@@ -55,11 +55,11 @@ function ProfileInput(props: any) {
   };
 
   return (
-    <div className='"w-full h-auto bg-gray-800 text-white p-8  rounded-lg m-8  overflow-y-auto flex'>
+    <div className='"w-full h-auto  text-white p-8  rounded-lg m-8  overflow-y-auto flex'>
       {/* Profile Form */}
       <div className="flex flex-col w-full">
         {/* Name */}
-        <div className="w-full h-16 bg-gray-800 text-white p-4 rounded-lg m-4 flex items-center">
+        <div className="w-full h-16  text-white p-4 rounded-lg m-4 flex items-center">
           <div className="w-20 h-full items-center">
             <h3>Name</h3>
           </div>
@@ -68,11 +68,11 @@ function ProfileInput(props: any) {
             onChange={handleChange}
             name="name"
             type="text"
-            className="input input-bordered input-primary w-full max-w-xs m-2 text-sm"
+            className="input input-bordered input-ghost w-full max-w-xs m-2 text-sm"
           />
         </div>
         {/* Title */}
-        <div className="w-full h-16 bg-gray-800 text-white p-4 rounded-lg m-4 flex items-center">
+        <div className="w-full h-16  text-white p-4 rounded-lg m-4 flex items-center">
           <div className="w-20 h-full items-center">
             <h3>Title</h3>
           </div>
@@ -81,11 +81,11 @@ function ProfileInput(props: any) {
             onChange={handleChange}
             name="title"
             type="text"
-            className="input input-bordered input-primary w-full max-w-xs m-2 text-sm"
+            className="input input-bordered input-ghost w-full max-w-xs m-2 text-sm"
           />
         </div>
         {/* Description */}
-        <div className="w-full h-32 bg-gray-800 text-white p-4 rounded-lg m-4 flex items-center">
+        <div className="w-full h-32 text-white p-4 rounded-lg m-4 flex items-center">
           <div className="w-20 h-full items-center">
             <h3>Description</h3>
           </div>
@@ -94,11 +94,11 @@ function ProfileInput(props: any) {
             onChange={handleChange}
             name="description"
             maxLength={250}
-            className="input input-bordered input-primary w-full max-w-xl m-4 h-full text-sm p-2"
+            className="input input-bordered input-ghost w-full max-w-xl m-4 h-full text-sm p-2"
           />
         </div>
         {/* Profile Image */}
-        <div className="w-full h-16 bg-gray-800 text-white p-4 rounded-lg m-4 flex items-center">
+        <div className="w-full h-16  text-white p-4 rounded-lg m-4 flex items-center">
           <div className="w-20 h-full items-center">
             <h3>Image</h3>
           </div>
@@ -106,7 +106,7 @@ function ProfileInput(props: any) {
             onChange={handleFileChange}
             type="file"
             name="image"
-            className="file-input file-input-bordered file-input-primary w-full max-w-xs"
+            className="file-input file-input-bordered file-input-neutral w-full max-w-xs"
           />
           <input
             type="hidden"
@@ -115,11 +115,11 @@ function ProfileInput(props: any) {
           ></input>
         </div>
         {/* Stack */}
-        <div className="w-full h-16 bg-gray-800 text-white p-4 rounded-lg m-4 flex items-center">
+        <div className="w-full h-16 text-white p-4 rounded-lg m-4 flex items-center">
           <div className="w-20 h-full items-center">
             <h3>Stack</h3>
           </div>
-          <button className="btn btn-neutral">Select Languages</button>
+          <button className="btn btn-primary">Select Languages</button>
         </div>
         {/* Update Data Button */}
         <div className="w-full h-16 text-white p-4 rounded-lg m-4 flex items-center">
@@ -131,7 +131,7 @@ function ProfileInput(props: any) {
       </div>
       {/* Square Div on the Right */}
       <div
-        className="w-16 h-16 rounded-full overflow-hidden ml-8"
+        className="w-16 h-16 border border-white rounded-full overflow-hidden ml-8"
         style={{
           backgroundImage: `url(${currentUserData.image})`,
           backgroundSize: "cover",

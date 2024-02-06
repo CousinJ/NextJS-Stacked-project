@@ -7,15 +7,23 @@ import ExploreResultsSector from './ExploreResultsSector'
 function ExploreJoin() {
 
 
-  
+
 
 //useState vars
 const [showResults, setShowResults] = useState(false)
 const [searchQuery, setSearchQuery] = useState('')
-const [searchResults, setSearchResults] = useState([{
+
+//search resutls 
+const [userSearchResults, setUserSearchResults] = useState([{
+  user_data: '',
+}])
+
+const [projectSearchResults, setProjectSearchResults] = useState([{
   user_info: '',
   project_info: '',
 }])
+
+
 const [userOrProject, setUserOrProject] = useState('users')
 const [buttonStyle, setButtonStyle] = useState({
   users: 'primary',
@@ -29,6 +37,7 @@ const [buttonStyle, setButtonStyle] = useState({
 //you can put this type in here to be more precise (I cant find the type)
 const handleSelectClick = (e: any) => {
   const button = e.target.name
+  console.log(userOrProject)
   if(userOrProject == button){
     
   }
@@ -50,17 +59,17 @@ const handleSelectClick = (e: any) => {
   }
   
   }
+//user effects here
 
 
-useEffect(() => {
-  console.log(searchResults)
-}, [searchResults])
 
+//===============================================
 //you can put this type in here to be more precise (I cant find the type)
 const handleQueryChange = (e: any) => {
   setSearchQuery(e.target.value)
+  
 } 
-
+//================================================
 const  handleSearchSubmit = async (e: any) => {
   e.preventDefault()
   
@@ -75,9 +84,16 @@ const  handleSearchSubmit = async (e: any) => {
   try {
     
     const results = await exploreSearchFunction(searchQuery, userOrProject)
-    
+    if(userOrProject == 'users') {
+      setUserSearchResults(results)
+      console.log(userSearchResults)
+    }
+    else if(userOrProject == 'projects'){
+      setProjectSearchResults(results)
+      console.log(projectSearchResults)
+    }
 
-  setSearchResults(results);
+  
 
 
  
@@ -85,17 +101,13 @@ const  handleSearchSubmit = async (e: any) => {
     console.log("error searching")
   }
  
- 
-//check search results
-if(searchResults.length == null) {
-  setShowResults(false)
-}
-else {
-  setShowResults(true)
-}
+
 
 
 }
+
+
+// ====================================================================
 
 
     return(
@@ -115,7 +127,7 @@ else {
   
  
    {/* will need to change how this renders */}
-   <ExploreResultsSector userOrProject={userOrProject} active={showResults} data={searchResults}></ExploreResultsSector>
+   <ExploreResultsSector userOrProject={userOrProject}  userSearchData={userSearchResults} projectSearchData={projectSearchResults}></ExploreResultsSector>
   
     </div>
     
