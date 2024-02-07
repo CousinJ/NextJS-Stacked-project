@@ -18,7 +18,7 @@ function ProjectCard(props: any) {
       <div className="flex items-center justify-between w-full">
         {props.project_info.public && (
           <div
-            className="w-5 h-5  ml-8 rounded-full bg-white  overflow-hidden"
+            className="w-5 h-5  ml-8 rounded-full   overflow-hidden"
             style={{
               backgroundImage: `url('/public.svg')`,
               backgroundSize: "cover",
@@ -28,7 +28,7 @@ function ProjectCard(props: any) {
         )}
         {!props.project_info.public && (
           <div
-            className="w-5 h-5  ml-8 rounded-full bg-white overflow-hidden"
+            className="w-5 h-5  ml-8 rounded-full  overflow-hidden"
             style={{
               backgroundImage: `url('/private.svg')`,
               backgroundSize: "cover",
@@ -37,7 +37,7 @@ function ProjectCard(props: any) {
           />
         )}
 
-        <Link className=" btn btn-ghost m-1" href={`/project/${props.project_info.name}`}>Open</Link>
+        <Link className=" btn btn-ghost m-1" href={`/project/${props.id}`}>Open</Link>
       </div>
     </div>
   );

@@ -56,7 +56,7 @@ async function Dashboard() {
       {/* passing in the userData because only the user projects show up in this component. in the search results it iterates through an array of users and grabs both objects off it in the map function */}
         <div className='flex flex-col gap-2'>
           {/* iterate with map here  */}
-          {projectData.map((item: ProjectItem) => (<ProjectCard key={item.name} user_info={userData} project_info={item} />))}
+          {projectData.map((item: ProjectItem, index: number) => (<ProjectCard key={item.name} id={index} user_info={userData} project_info={item} />))}
         
         </div>
        

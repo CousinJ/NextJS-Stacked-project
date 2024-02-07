@@ -113,6 +113,7 @@ async function SearchProjectCollection(searchTerm: string) {
     // Iterate over each matching project and construct the desired object
     projectResults.forEach(project => {
       const resultObject = {
+        _id : project._id,
         user_info: project.user_info,
         project_info: project.project_info
       };
@@ -140,6 +141,7 @@ async function searchUserCollection(searchTerm: string) {
      // Iterate over each matching project and construct the desired object
      userResults.forEach(user => {
        const resultObject = {
+        _id : user._id,
          user_data: user.user_data,
          
        };
@@ -171,3 +173,5 @@ export async function exploreSearchFunction(searchTerm: string, userOrProject: s
 
     return searchResults
 }
+//======================================================================================================
+
