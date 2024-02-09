@@ -22,6 +22,7 @@ const handleClose = () => {
         {props.modalBool &&       <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
         
         <div className='" border w-full h-auto bg-gray-800 text-white p-8  rounded-lg m-8  overflow-y-auto"'>
+        <h1 className='text-2xl'> New Task</h1>
     {/* name */}
                <div className="w-full h-16 bg-gray-800 text-white p-4 rounded-lg m-4 flex items-center">
                 
