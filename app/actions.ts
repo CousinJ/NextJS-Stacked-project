@@ -206,3 +206,59 @@ export async function GetProjectPageData(projectId: string) {
   return returnableObject
 }
 
+//======================================================================================================
+export async function createNewFeature(formData: FormData) {
+
+  try {
+    const projectId = formData.get('projectId')
+   //set taks to empty array
+    const featureData = {
+      name: formData.get('name'),
+      description: formData.get('description'),
+      tasks: []
+    }
+    const projectData = await Project.findOneAndUpdate(
+      { _id: projectId }, // Filter criteria
+      { $push: { "project_content.features": featureData } }, // Update operation
+      { new: true } // Options to return the updated document
+    );
+    console.log(projectData.project_content.features)
+    //revalidate the path of the project (dynamic)
+     revalidatePath(`/project/${projectId}`)
+  }
+  catch(e) {
+    console.log('error creating new feature ')
+  }
+  
+}
+//======================================================================================================
+//function
+export async function createNewTask(formData: FormData) {
+  try {
+   const  feature_index = formData.get('feature_index');
+   console.log(feature_index)
+    const projectId = formData.get('projectId');
+
+    const taskObject = {
+      name: formData.get('name'),
+      details: formData.get('details'),
+    };
+
+    const taskData = await Project.findOneAndUpdate(
+      { 
+        _id: projectId
+      },
+      { 
+        $push: { [`project_content.features.${feature_index}.tasks`]: taskObject } // Push taskObject into the tasks array of the feature at feature_index
+      },
+      { 
+        new: true 
+      }
+    );
+    
+    // Revalidate the path of the project (dynamic)
+    revalidatePath(`/project/${projectId}`);
+  } catch(e) {
+   console.log('error making task' + e)
+  }
+}

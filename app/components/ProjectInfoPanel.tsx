@@ -1,6 +1,7 @@
 "use client"
 import React, {useState, useEffect} from 'react'
 import ProjectForm from './ProjectForm'
+import FeatureForm from './FeatureForm'
 function ProjectInfoPanel(props: any) {
 
 
@@ -61,7 +62,8 @@ function ProjectInfoPanel(props: any) {
       {/* feature Form */}
       {modal && (
         <div className="fixed inset-0 z-20 flex items-center justify-center">
-          <ProjectForm setModalBool={setModal} modalBool={modal} />
+          
+          <FeatureForm projectId={props.data._id} setModalBool={setModal} modalBool={modal} />
         </div>
       )}
 
