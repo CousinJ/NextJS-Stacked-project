@@ -70,8 +70,8 @@ const {userId} = auth()
   //pass in PROJECT CONTENT OBJECT here
   //this is where we change the project content object
 const projectContentObject = {
-  tasks: [],
-  followers: [],
+  features: [],
+  
 
 }
 //submit the userId to the project document
@@ -191,4 +191,18 @@ export async function exploreSearchFunction(searchTerm: string, userOrProject: s
     return searchResults
 }
 //======================================================================================================
+
+export async function GetProjectPageData(projectId: string) {
+  const projectPageData = await Project.findOne({_id: projectId})
+  const returnableObject = {
+    _id: projectPageData._id,
+    user_id: projectPageData.user_id,
+    user_info: projectPageData.user_info,
+    project_info: projectPageData.project_info,
+    project_content: projectPageData.project_content
+    
+  }
+
+  return returnableObject
+}
 
