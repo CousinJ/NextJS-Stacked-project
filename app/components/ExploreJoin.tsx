@@ -19,6 +19,7 @@ const [userSearchResults, setUserSearchResults] = useState([{
 }])
 
 const [projectSearchResults, setProjectSearchResults] = useState([{
+  _id: '',
   user_info: '',
   project_info: '',
 }])

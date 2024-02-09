@@ -4,6 +4,11 @@ import mongoose from 'mongoose';
 // Define a schema for the User model
 
 const projectSchema = new mongoose.Schema ({
+
+  user_id: {
+    type: String,
+    required: true
+  },
   
   user_info: {
     type: Object,

@@ -13,7 +13,7 @@ function ProjectInteraction(props: any) {
 //add logic for selecting project 
   return (
     <div className="w-full  m-2 ">
-      <ProjectCard project_info={props.project_info} user_info={props.user_info} />
+      <ProjectCard id={props.id} project_info={props.project_info} user_info={props.user_info} />
       {/* other stuff you want to have render on the user (following user link user to see profile etc.) */}
     </div>
   );

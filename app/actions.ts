@@ -33,8 +33,22 @@ export async function updateUserData( formData: FormData) {
 }
 
 //======================================================================================================
+export async function getUserProjects() {
+  const {userId} = auth();
+  connectDB()
+const userProjectArr: any  = []
+const userProjects = await Project.find({user_id: userId})
 
+// Iterate over each matching project and construct the desired object
+userProjects.forEach(project => {
+  
+  userProjectArr.push(project);
+});
+console.log(userProjectArr)
+return userProjectArr
 
+}
+//======================================================================================================
 export async function thisUserData() {
     //kept getting an error saying "operation findOne buffering timed out"
     // it seems that it was working before because the connectDB was running 
@@ -50,19 +64,22 @@ export async function thisUserData() {
 //======================================================================================================
 
 //function used to set project up in createUserProject
-async function InitializeProject(user_info:Object, projectInfo: Object ) {
+async function InitializeProject(user_info:Object, projectInfo: Object, ) {
 //FIXED the duplication error by deleting the collection in mongo compass then restarting it 
-
+const {userId} = auth()
   //pass in PROJECT CONTENT OBJECT here
   //this is where we change the project content object
 const projectContentObject = {
   tasks: [],
   followers: [],
 
-}//make userID a different string 
- 
+}
+//submit the userId to the project document
+
 //create new project instance 
 const project = await Project.create({
+
+  user_id: userId,
   user_info: user_info,
   project_info: projectInfo,
   project_content: projectContentObject,
@@ -108,7 +125,7 @@ async function SearchProjectCollection(searchTerm: string) {
     });
     
     // Create an array to store search results
-    const searchResults: {user_info: any, project_info: any}[] = []
+    const searchResults: {_id: any, user_info: any, project_info: any}[] = []
 
     // Iterate over each matching project and construct the desired object
     projectResults.forEach(project => {
