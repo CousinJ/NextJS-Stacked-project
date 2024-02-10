@@ -158,7 +158,7 @@ async function searchUserCollection(searchTerm: string) {
      // Iterate over each matching project and construct the desired object
      userResults.forEach(user => {
        const resultObject = {
-        _id : user._id,
+        user_id : user.user_id,
          user_data: user.user_data,
          
        };
@@ -202,7 +202,7 @@ export async function GetProjectPageData(projectId: string) {
     project_content: projectPageData.project_content
     
   }
-
+//return a value here to say if user_id == auth id then make edit = true if not then false
   return returnableObject
 }
 

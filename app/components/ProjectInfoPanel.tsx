@@ -38,6 +38,7 @@ function ProjectInfoPanel(props: any) {
 
 </div>
 {/* add feature button */}
+{}
 <div onClick={handleClick} className='w-1/6 h-16 rounded-xl flex bg-primary bg-opacity-50 hover:bg-opacity-100  items-center justify-center mt-8 transition duration-300 ease-in-out'>
     <h3 className='m-4 text-xl text-base-300'>Add Feature</h3>
 <div

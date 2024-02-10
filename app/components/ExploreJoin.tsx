@@ -15,6 +15,7 @@ const [searchQuery, setSearchQuery] = useState('')
 
 //search resutls 
 const [userSearchResults, setUserSearchResults] = useState([{
+  user_id: '',
   user_data: '',
 }])
 

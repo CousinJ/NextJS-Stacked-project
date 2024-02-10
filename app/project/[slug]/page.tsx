@@ -16,7 +16,7 @@ const currentProjectData = await GetProjectPageData(params.slug)
 
 
 
-const placeholderCode = "import React from 'react'; "
+
     
     return(
     

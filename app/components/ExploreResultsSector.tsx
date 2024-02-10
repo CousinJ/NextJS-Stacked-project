@@ -20,7 +20,7 @@ function ExploreResultsSector(props: any) {
 {/* iterate with map here  */}
           {/* USER */}
 {props.userOrProject === 'users' &&  props.userSearchData.map((item: any) => (
-  item.user_data.name && <UserInteraction key={item.user_data.name}  data={item.user_data} />
+  item.user_data.name && <UserInteraction key={item.user_id}  data={item.user_data} id={item.user_id}/>
   ))}
 
         </div>

@@ -11,7 +11,7 @@ function UserInteraction(props: any) {
 
   return (
     <div className="w-full  m-2 ">
-    <UserCard data={props.data}  />
+    <UserCard data={props.data} id={props.id}  />
     {/* other stuff you want to have render on the user (following user link user to see profile etc.) */}
   </div>
   );
